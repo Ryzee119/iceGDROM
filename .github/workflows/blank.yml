@@ -16,11 +16,13 @@ jobs:
 
     - name: Install and Setup Dependencies
       run: |
+        git checkout faccfa4823b26bdc0e8c7a1e88f5a389997961c1
         sudo apt-get update -y && sudo apt-get install -y build-essential clang bison flex libreadline-dev
         sudo apt-get install -y gawk tcl-dev libffi-dev git mercurial graphviz
         sudo apt-get install -y xdot pkg-config python python3 libftdi-dev
         sudo apt-get install -y qt5-default python3-dev libboost-all-dev cmake libeigen3-dev
         sudo apt-get install -y yosys
+        sudo apt-get install binutils gcc-avr avr-libc
         git clone https://github.com/YosysHQ/icestorm.git icestorm
         git clone https://github.com/cseed/arachne-pnr.git arachne-pnr
         git clone https://github.com/YosysHQ/nextpnr nextpnr
@@ -37,10 +39,6 @@ jobs:
         make
         sudo make install
         cd ..
-        wget https://github.com/riscv/riscv-gnu-toolchain/releases/download/2021.06.18/riscv32-elf-ubuntu-20.04-nightly-2021.06.18-nightly.tar.gz
-        tar xvf riscv32-elf-ubuntu-20.04-nightly-2021.06.18-nightly.tar.gz -C ~/
-        export PATH=$PATH:~/riscv/bin
-
     - name: Compile
       run: |
         make -j
