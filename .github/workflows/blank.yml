@@ -25,16 +25,16 @@ jobs:
         git clone https://github.com/cseed/arachne-pnr.git arachne-pnr
         git clone https://github.com/YosysHQ/nextpnr nextpnr
         cd icestorm
-        make -j
+        make
         sudo make install
         cd ..
         cd arachne-pnr
-        make -j
+        make
         sudo make install
         cd ..
         cd nextpnr
         cmake -DARCH=ice40 -DCMAKE_INSTALL_PREFIX=/usr/local .
-        make -j
+        make
         sudo make install
         cd ..
         wget https://github.com/riscv/riscv-gnu-toolchain/releases/download/2021.06.18/riscv32-elf-ubuntu-20.04-nightly-2021.06.18-nightly.tar.gz
