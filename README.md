@@ -1,6 +1,6 @@
 iceGDROM
 ========
-
+ 
 This is an implementation of IDE and the "Sega Packet Interface"
 as used by the Dreamcast GD-ROM drive, using an iCE40 FPGA.
 
