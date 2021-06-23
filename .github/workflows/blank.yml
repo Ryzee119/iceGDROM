@@ -20,18 +20,22 @@ jobs:
         sudo apt-get install -y gawk tcl-dev libffi-dev git mercurial graphviz
         sudo apt-get install -y xdot pkg-config python python3 libftdi-dev
         sudo apt-get install -y qt5-default python3-dev libboost-all-dev cmake libeigen3-dev
-        sudo add-apt-repository ppa:saltmakrell/ppa
-        sudo apt-get update
         sudo apt-get install yosys
         git clone https://github.com/YosysHQ/icestorm.git icestorm
         git clone https://github.com/cseed/arachne-pnr.git arachne-pnr
         git clone https://github.com/YosysHQ/nextpnr nextpnr
         git clone https://github.com/YosysHQ/yosys.git yosys
+        git clone https://github.com/YosysHQ/nextpnr nextpnr
         cd icestorm
         make -j
         sudo make install
         cd ..
         cd arachne-pnr
+        make -j
+        sudo make install
+        cd ..
+        cd nextpnr
+        cmake -DARCH=ice40 -DCMAKE_INSTALL_PREFIX=/usr/local .
         make -j
         sudo make install
         cd ..
