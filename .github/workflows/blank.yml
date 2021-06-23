@@ -25,7 +25,6 @@ jobs:
         git clone https://github.com/cseed/arachne-pnr.git arachne-pnr
         git clone https://github.com/YosysHQ/nextpnr nextpnr
         git clone https://github.com/YosysHQ/yosys.git yosys
-        git clone https://github.com/YosysHQ/nextpnr nextpnr
         cd icestorm
         make -j
         sudo make install
