@@ -1,0 +1,45 @@
+name: Build
+
+on:
+  pull_request:
+    branches: [ master ]
+  push:
+    branches: [ master ]
+
+jobs:
+  Linux:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout Repository
+      uses: actions/checkout@v2
+
+    - name: Install and Setup Dependencies
+      run: |
+        sudo apt-get update -y && sudo apt-get install -y build-essential clang bison flex libreadline-dev
+        sudo apt-get install -y gawk tcl-dev libffi-dev git mercurial graphviz
+        sudo apt-get install -y xdot pkg-config python python3 libftdi-dev
+        sudo apt-get install -y qt5-default python3-dev libboost-all-dev cmake libeigen3-dev
+        git clone https://github.com/YosysHQ/icestorm.git icestorm
+        git clone https://github.com/cseed/arachne-pnr.git arachne-pnr
+        git clone https://github.com/YosysHQ/nextpnr nextpnr
+        git clone https://github.com/YosysHQ/yosys.git yosys
+        cd icestorm
+        make -j
+        sudo make install
+        cd ..
+        cd arachne-pnr
+        make -j
+        sudo make install
+        cd ..
+        cd yosys
+        make -j
+        sudo make install
+        cd ..
+        wget https://github.com/riscv/riscv-gnu-toolchain/releases/download/2021.06.18/riscv32-elf-ubuntu-20.04-nightly-2021.06.18-nightly.tar.gz
+        tar xvf riscv32-elf-ubuntu-20.04-nightly-2021.06.18-nightly.tar.gz
+        export PATH=$PATH:~/riscv/bin
+
+    - name: Compile
+      run: |
+        make -j
